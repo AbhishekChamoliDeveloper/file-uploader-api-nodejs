@@ -23,16 +23,13 @@ const upload = multer({ storage });
 
 app.post("/upload", upload.single("file"), (req, res) => {
   if (!req.file) {
-    return res
-      .status(400)
-      .json({
-        error:
-          "File upload failed. Please make sure to select a file to upload.",
-      });
+    return res.status(400).json({
+      error: "File upload failed. Please make sure to select a file to upload.",
+    });
   }
 
   const originalName = req.file.originalname;
-  const fileUrl = `http://localhost:${port}/${req.file.filename}`;
+  const fileUrl = `https://file-uploade-api.onrender.com/${req.file.filename}`;
 
   res.json({ originalName, fileUrl });
 });
